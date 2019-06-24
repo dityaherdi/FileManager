@@ -22,12 +22,10 @@ class ContentType {
     // Hitung jumlah folder dalam direktori
     public static function countFolder($path)
     {
-        $privateFolder = Folder::where(['isPrivate' => 1, 'status' => 1])->where('id_unit', '!=', Auth::user()->id_unit)
-                                ->pluck('path')->toArray();
-
         if (Auth::user()->isAdmin) {
             return count(Storage::directories($path));
         } else {
+            $privateFolder = Folder::where(['isPrivate' => 1, 'status' => 1])->where('id_unit', '!=', Auth::user()->id_unit)->pluck('path')->toArray();
             return count(array_diff(Storage::directories($path), $privateFolder));
         }
     }
@@ -35,12 +33,10 @@ class ContentType {
     // Hitung jumlah file dalam direktori
     public static function countFile($path)
     {
-        $privateFile = FileMetaData::where(['isPrivate' => 1, 'status' => 1])->where('id_unit', '!=', Auth::user()->id_unit)
-                                    ->pluck('path')->toArray();
-
         if (Auth::user()->isAdmin) {
             return count(Storage::files($path));
         } else {
+            $privateFile = FileMetaData::where(['isPrivate' => 1, 'status' => 1])->where('id_unit', '!=', Auth::user()->id_unit)->pluck('path')->toArray();
             return count(array_diff(Storage::files($path), $privateFile));
         }
     }
@@ -133,16 +129,13 @@ class ContentType {
     // Untuk mengambil path file yang memiliki status private
     public static function private($paths)
     {
-        $privateFolder = Folder::where(['isPrivate' => 1, 'status' => 1])->where('id_unit', '!=', Auth::user()->id_unit)
-                                ->pluck('path')->toArray();
-        $privateFile = FileMetaData::where(['isPrivate' => 1, 'status' => 1])->where('id_unit', '!=', Auth::user()->id_unit)
-                                ->pluck('path')->toArray();
-
-        $private = array_merge($privateFolder, $privateFile);
-
         if (Auth::user()->isAdmin) {
             return $paths;
         } else {
+            $privateFolder = Folder::where(['isPrivate' => 1, 'status' => 1])->where('id_unit', '!=', Auth::user()->id_unit)->pluck('path')->toArray();
+            $privateFile = FileMetaData::where(['isPrivate' => 1, 'status' => 1])->where('id_unit', '!=', Auth::user()->id_unit)->pluck('path')->toArray();
+
+            $private = array_merge($privateFolder, $privateFile);
             return array_diff($paths, $private);
         }
     }

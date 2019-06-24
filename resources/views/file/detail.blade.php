@@ -5,20 +5,30 @@
 @endsection
 
 @section('content')
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    {{-- <div class="d-sm-flex align-items-center justify-content-between">
         <button onclick="toDestination('{{ $fileDetail->path }}')" class="btn btn-success btn-icon-split btn-sm">
             <span class="icon text-white-50">
                 <i class="fas fa-chevron-circle-left"></i>
             </span>
             <span class="text">Kembali</span>
         </button>
-    </div>
-    <div class="card text-center mb-5 border-left-primary">
-        <div class="card-header">
-            <h5 class="card-title">{{ $fileDetail->nama_file }}</h5>
+    </div> --}}
+            <div class="alert alert-danger" role="alert">
+                {{-- A simple danger alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like. --}}
+                <i class="fas fa-info-circle"></i> Halaman ini diperuntukan untuk preview saja. <b>Tidak disarankan</b> untuk melakukan editing dokumen secara langsung pada halaman ini. 
+            </div>
+    <div class="card text-center mb-5">
+        <div class="card-header d-sm-flex align-items-center justify-content-between">
+            <button onclick="toDestination('{{ $fileDetail->path }}')" class="btn btn-success btn-icon-split btn-sm">
+                <span class="icon text-white-50">
+                    <i class="fas fa-chevron-circle-left"></i>
+                </span>
+                <span class="text">Kembali</span>
+            </button>
+            <h6 class="card-title">{{ $fileDetail->nama_file }}</h6>
         </div>
         <div class="card-body">
-            <embed src="{{ asset('storage'.ContentType::getContentByPath($fileDetail->path)) }}" height="600" width="100%" autostart="false" />
+            <embed src="{{ asset('storage'.ContentType::getContentByPath($fileDetail->path)) }}" height="600" width="100%"/>
             <hr>
             @if (ContentType::renderActionButton($fileDetail->path))
                 @can('update')

@@ -30,6 +30,7 @@ class PermissionController extends Controller
         $permission->create = $this->checkbox($request->create);
         $permission->update = $this->checkbox($request->update);
         $permission->delete = $this->checkbox($request->delete);
+        $permission->download = $this->checkbox($request->download);
         $permission->save();
 
         toastr()->success('Hak Akses telah diperbarui', 'Sukses');

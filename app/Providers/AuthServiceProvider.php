@@ -59,6 +59,14 @@ class AuthServiceProvider extends ServiceProvider
             return $user->permission->delete;
         });
 
+        Gate::define('download', function($user) {
+            if ($user->isAdmin) {
+                return true;
+            }
+            
+            return $user->permission->download;
+        });
+
         Gate::define('isAdmin', function($user) {
             return $user->isAdmin;
         });

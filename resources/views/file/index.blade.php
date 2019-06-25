@@ -203,15 +203,18 @@
                                                 @endcan
                                             @endif
                                         @else
-                                            <a href="javascript:void(0)" class="dropdown-item" id="btnDownloadFile" title="Download File"
-                                                onclick="downloadFile('{{ $path }}', '{{ ContentType::contentName($path) }}')">
-                                                <i class="fas fa-download mr-2"></i>Download
-                                            </a>
-
-                                            <a href="javascript:void(0)" class="dropdown-item" id="btnDetail" title="Preview Detail"
-                                                onclick="detail('{{ $path }}')">
-                                                <i class="fas fa-eye mr-2"></i>View
-                                            </a>
+                                            @can('download')
+                                                <a href="javascript:void(0)" class="dropdown-item" id="btnDownloadFile" title="Download File"
+                                                    onclick="downloadFile('{{ $path }}', '{{ ContentType::contentName($path) }}')">
+                                                    <i class="fas fa-download mr-2"></i>Download
+                                                </a>
+                                            @endcan
+                                            @can('view')
+                                                <a href="javascript:void(0)" class="dropdown-item" id="btnDetail" title="Preview Detail"
+                                                    onclick="detail('{{ $path }}')">
+                                                    <i class="fas fa-eye mr-2"></i>View
+                                                </a>
+                                            @endcan
 
                                             @if (ContentType::renderActionButton($path))
                                                 @can('update')

@@ -26,11 +26,13 @@ class FileUploadRequest extends FormRequest
     {
         if ($this->has('file')) {
             return [
-                'file' => 'required|mimes:doc,docx,xls,xlsx,ppt,pptx,pdf,txt,mp4,avi,mpga,bmp,jpg,jpeg,png,tiff,exe,rar,zip'
+                // 'file' => 'required|mimes:doc,docx,xls,xlsx,ppt,pptx,pdf,txt,mp4,avi,mpga,bmp,jpg,jpeg,png,tiff,exe,rar,zip'
+                'file' => 'required'
             ];
         } else if($this->has('files')) {
             return [
-                'files.*' => 'required|mimes:doc,docx,xls,xlsx,ppt,pptx,pdf,txt,mp4,avi,mpga,bmp,jpg,jpeg,png,tiff,exe,rar,zip'
+                // 'files.*' => 'required|mimes:doc,docx,xls,xlsx,ppt,pptx,pdf,txt,mp4,avi,mpga,bmp,jpg,jpeg,png,tiff,exe,rar,zip'
+                'files.*' => 'required'
             ];
         }
     }
@@ -40,12 +42,12 @@ class FileUploadRequest extends FormRequest
         if ($this->has('file')) {
             return [
                 'file.required' => 'Tidak ada file yang di upload',
-                'file.mimes' => 'Format file tidak didukung!'
+                // 'file.mimes' => 'Format file tidak didukung!'
             ];
         } else if ($this->has('files')) {
             return [
                 'file.required' => 'Tidak ada file yang di upload',
-                'files.*.mimes' => 'Upload Gagal! Terdapat format file yang tidak didukung!'
+                // 'files.*.mimes' => 'Upload Gagal! Terdapat format file yang tidak didukung!'
             ];
         }
     }

@@ -15,7 +15,7 @@ class UnitSeeder extends Seeder
             [
                 'nama_unit' => 'Administrator',
                 'nama_folder' => 'Administrator',
-                'status' => 0,
+                'status' => 1,
                 'created_at' => NOW(),
                 'updated_at' => NOW()
             ]

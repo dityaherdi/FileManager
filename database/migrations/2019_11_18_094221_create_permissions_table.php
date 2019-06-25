@@ -20,6 +20,7 @@ class CreatePermissionsTable extends Migration
             $table->boolean('create')->default(0);
             $table->boolean('update')->default(0);
             $table->boolean('delete')->default(0);
+            $table->boolean('download')->default(0);
             $table->timestamps();
 
             $table->foreign('id_user')->references('id')->on('users');

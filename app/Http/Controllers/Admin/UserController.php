@@ -20,7 +20,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $dataUser = User::latest()->get();
+        $dataUser = User::latest()->where('nama_user', '!=', 'Administrator')->get();
         return view('admin.user.index', compact('dataUser'));
     }
 
@@ -31,7 +31,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        $dataUnit = Unit::all();
+        // $dataUnit = Unit::all();
+        $dataUnit = Unit::where('nama_unit', '!=', 'Administrator');
         $dataJabatan = Jabatan::all();
         return view('admin.user.create', compact('dataUnit', 'dataJabatan'));
     }
@@ -45,8 +46,11 @@ class UserController extends Controller
     // public function store(UserRequest $request)
     public function store(Request $request)
     {
+        // dd($request->all());
         if ($request->id_unit == 'Administrator') {
+            // $id = Unit::where(['nama_unit' => $request->id_unit, 'status' => 1])->value('id');
             $id = Unit::where(['nama_unit' => $request->id_unit, 'status' => 1])->value('id');
+            // dd($id, $request->id_unit);
             $request->merge(['id_unit' => $id, 'isAdmin' => 1]);
         }
 

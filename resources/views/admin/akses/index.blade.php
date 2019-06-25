@@ -52,6 +52,11 @@
                                                 {{ $per->delete == 1 ? 'checked' : '' }} name="delete" autocomplete="off">
                                             <label class="custom-control-label" for="{{ $per->user->nik }}delete">Delete</label>
                                         </div>
+                                        <div class="custom-control custom-checkbox form-check-inline">
+                                            <input type="checkbox" class="custom-control-input" id="{{ $per->user->nik }}download"
+                                                {{ $per->download == 1 ? 'checked' : '' }} name="download" autocomplete="off">
+                                            <label class="custom-control-label" for="{{ $per->user->nik }}download">Download</label>
+                                        </div>
                                         <button type="submit" class="btn btn-success btn-icon-split btn-sm">
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-check"></i>

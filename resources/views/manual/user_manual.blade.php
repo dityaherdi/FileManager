@@ -336,7 +336,7 @@
                     <h3 class="section__title">Membuka File</h3>
                     <p>Anda dapat melihat konten atau detail yang terdapat dalam file dengan memilih menu <i class="fas fa-eye"></i> View pada Tombol Option.</p>
                     <img src="{{ asset('img/panduan/lihat_file_step_1.png') }}" class="atur-lebar" alt="">
-                    <h4 class="section__title">Tipe File Yang Dapat Diupload dan Diakses</h4>
+                    {{-- <h4 class="section__title">Tipe File Yang Dapat Diupload dan Diakses</h4>
                     <table>
                         <tr>
                             <th>Tipe</th>
@@ -397,12 +397,12 @@
                               </ul>
                             </td>
                         </tr>
-                    </table>
+                    </table> --}}
                     <p>Berikut ini adalah contoh tampilan ketika anda membuka file dokumen.</p>
                     <img src="{{ asset('img/panduan/lihat_file_sample.png') }}" class="atur-lebar" alt="">
                     <h4 class="section__title">Ketentuan Dokumen Editor</h4>
                       <ul>
-                        <li><p class="red-text-color">Dokumen dapat di-edit sesuai keinginan, namun tidak akan mengubah file asli yang ada di server</p></li>
+                        <li><p class="red-text-color">Tidak disarankan untuk mengubah/edit dokumen pada halaman ini</p></li>
                         <li><p class="red-text-color">Apabila dokumen di save, maka akan tersimpan atau terdownload ke Komputer / Laptop anda</p></li>
                         <li><p class="red-text-color">Pada beberapa kasus terdapat kemungkinan file yang ingin dibuka akan ter-download secara otomatis. Hal ini kemungkinan disebabkan oleh <b>Aplikasi Download Manager</b> yang ter-install di komputer/laptop anda (ex: IDM, XDM, dll).</p></li>
                         <li><p class="red-text-color">Anda dapat me-nonaktifkan <b>Aplikasi Download Manager</b> yang anda gunakan untuk melihat file atau tetap men-download file yang ingin dibuka.</li>

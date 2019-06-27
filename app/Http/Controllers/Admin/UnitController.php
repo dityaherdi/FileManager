@@ -19,7 +19,7 @@ class UnitController extends Controller
      */
     public function index()
     {
-        $dataUnit = Unit::latest()->get();
+        $dataUnit = Unit::latest()->where('nama_unit', '!=', 'Administrator')->get();
         return view('admin.unit.index', compact('dataUnit'));
     }
 

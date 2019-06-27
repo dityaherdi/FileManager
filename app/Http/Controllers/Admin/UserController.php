@@ -32,7 +32,7 @@ class UserController extends Controller
     public function create()
     {
         // $dataUnit = Unit::all();
-        $dataUnit = Unit::where('nama_unit', '!=', 'Administrator');
+        $dataUnit = Unit::where('nama_unit', '!=', 'Administrator')->get();
         $dataJabatan = Jabatan::all();
         return view('admin.user.create', compact('dataUnit', 'dataJabatan'));
     }

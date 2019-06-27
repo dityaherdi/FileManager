@@ -74,6 +74,16 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('isManager', function($user) {
             return $user->isManager;
         });
+
+        // Gate::define('renderOptionsButton', function($user) {
+        //     if ($user->isAdmin) {
+        //         return true;
+        //     } else if($user->permission->view || $user->permission->create || $user->permission->update || $user->permission->delete || $user->permission->download) {
+        //         return true;
+        //     }
+
+        //     return false;
+        // });
         // end gate
     }
 }

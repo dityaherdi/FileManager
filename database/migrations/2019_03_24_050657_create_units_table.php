@@ -18,6 +18,7 @@ class CreateUnitsTable extends Migration
             $table->string('nama_unit');
             $table->string('nama_folder');
             $table->bigInteger('kapasitas')->default(1073741824);
+            $table->boolean('isDireksi')->default(0);
             $table->boolean('status')->default(1);
             $table->timestamps();
         });

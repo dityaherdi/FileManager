@@ -182,6 +182,7 @@
 
                             {{-- Action --}}
                             <td>
+                                @can('renderOptionsButton')
                                 <div class="dropdown">
                                     <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="optionDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-cogs mr-2"></i> Option
@@ -233,6 +234,7 @@
                                         @endif
                                     </div>
                                 </div>
+                                @endcan
                             </td>
                             {{-- End Action --}}
                         </tr>

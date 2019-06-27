@@ -41,6 +41,7 @@ class UnitController extends Controller
      */
     public function store(UnitRequest $request)
     {
+        // dd($request->all());
         // Make root folder each unit
         $folderPath = storage_path('app/public/'.$request->nama_folder);
         $relativePath = 'public/'.$request->nama_folder;

@@ -30,18 +30,35 @@
                         <input type="number" value="{{ old('nama_folder') }}" class="form-control" id="kapasitas" name="kapasitas">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="">Status :</label>
-                    <div class="custom-control custom-radio">
-                        <input type="radio" id="inputStatusAktif" value="1" name="status" class="custom-control-input">
-                        <label class="custom-control-label" for="inputStatusAktif">Aktif</label>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-inline">
+                            <label for="" class="mr-2">Status :</label>
+                            <div class="custom-control custom-radio mr-2">
+                                <input type="radio" id="inputStatusAktif" value="1" name="status" class="custom-control-input">
+                                <label class="custom-control-label" for="inputStatusAktif">Aktif</label>
+                            </div>
+                            <div class="custom-control custom-radio mr-2">
+                                <input type="radio" id="inputStatusNonAktif" value="0" name="status" class="custom-control-input">
+                                <label class="custom-control-label" for="inputStatusNonAktif">Tidak Aktif</label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="custom-control custom-radio">
-                        <input type="radio" id="inputStatusNonAktif" value="0" name="status" class="custom-control-input">
-                        <label class="custom-control-label" for="inputStatusNonAktif">Tidak Aktif</label>
+                    <div class="col-md-4">
+                        <div class="form-inline">
+                            <label for="" class="mr-2">Khusus Direksi :</label>
+                            <div class="custom-control custom-radio mr-2">
+                                <input type="radio" id="inputIsDireksi" value="1" name="isDireksi" class="custom-control-input">
+                                <label class="custom-control-label" for="inputIsDireksi">Iya</label>
+                            </div>
+                            <div class="custom-control custom-radio mr-2">
+                                <input type="radio" id="inputIsNotDireksi" value="0" name="isDireksi" class="custom-control-input">
+                                <label class="custom-control-label" for="inputIsNotDireksi">Tidak</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <button type="submit" href="#" class="btn btn-primary btn-icon-split">
+                <button type="submit" href="#" class="btn btn-primary btn-icon-split mt-2">
                     <span class="icon text-white-50">
                         <i class="fas fa-save"></i>
                     </span>

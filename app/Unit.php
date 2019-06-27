@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Unit extends Model
 {
     protected $fillable = [
-        'nama_unit', 'nama_folder', 'kapasitas', 'status'
+        'nama_unit', 'nama_folder', 'kapasitas', 'isDireksi', 'status'
     ];
 
     public function users()

@@ -22,7 +22,7 @@ class ContentType {
     // Hitung jumlah folder dalam direktori
     public static function countFolder($path)
     {
-        if (Auth::user()->isAdmin) {
+        if (Auth::user()->isAdmin || Auth::user()->unit->isDireksi) {
             return count(Storage::directories($path));
         } else {
             $privateFolder = Folder::where(['isPrivate' => 1, 'status' => 1])->where('id_unit', '!=', Auth::user()->id_unit)->pluck('path')->toArray();
@@ -33,7 +33,7 @@ class ContentType {
     // Hitung jumlah file dalam direktori
     public static function countFile($path)
     {
-        if (Auth::user()->isAdmin) {
+        if (Auth::user()->isAdmin || Auth::user()->unit->isDireksi) {
             return count(Storage::files($path));
         } else {
             $privateFile = FileMetaData::where(['isPrivate' => 1, 'status' => 1])->where('id_unit', '!=', Auth::user()->id_unit)->pluck('path')->toArray();
@@ -129,7 +129,7 @@ class ContentType {
     // Untuk mengambil path file yang memiliki status private
     public static function private($paths)
     {
-        if (Auth::user()->isAdmin) {
+        if (Auth::user()->isAdmin || Auth::user()->unit->isDireksi) {
             return $paths;
         } else {
             $privateFolder = Folder::where(['isPrivate' => 1, 'status' => 1])->where('id_unit', '!=', Auth::user()->id_unit)->pluck('path')->toArray();

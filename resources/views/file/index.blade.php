@@ -182,7 +182,7 @@
 
                             {{-- Action --}}
                             <td>
-                                @can('renderOptionsButton')
+                                {{-- {{ ContentType::renderOptionButton() }} --}}
                                 <div class="dropdown">
                                     <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="optionDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-cogs mr-2"></i> Option
@@ -202,6 +202,10 @@
                                                         <i class="fas fa-trash mr-2"></i>Delete
                                                     </a>
                                                 @endcan
+                                            @else
+                                            <a href="#" class="dropdown-item">
+                                                <i class="fas fa-ban mr-2"></i>Hak Akses Tidak Tersedia
+                                            </a>
                                             @endif
                                         @else
                                             @can('download')
@@ -230,11 +234,15 @@
                                                         <i class="fas fa-trash mr-2"></i>Delete
                                                     </a>
                                                 @endcan
+                                            @else
+                                                <a href="#" class="dropdown-item">
+                                                    <i class="fas fa-ban mr-2"></i>Hak Akses Tidak Tersedia
+                                                </a>
                                             @endif
                                         @endif
                                     </div>
                                 </div>
-                                @endcan
+                                
                             </td>
                             {{-- End Action --}}
                         </tr>

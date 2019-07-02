@@ -177,4 +177,15 @@ class ContentType {
         return ContentType::whoHasThisPath($path) == Auth::user()->id_unit ? 1 : 0;
     }
 
+    public static function cannotAccess()
+    {
+        $user = Auth::user()->permission;
+
+        if ($user->view || $user->create || $user->update || $user->delete || $user->download) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 }

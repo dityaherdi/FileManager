@@ -95,15 +95,19 @@
                                                 <td>{{ $file->unit->nama_unit }}</td>
                                                 <td>{{ ContentType::relativePath($file->path) }}</td>
                                                 <td>
-                                                    <button onclick="toDownload('{{ $file->path }}')" class="btn btn-secondary btn-circle btn-sm" title="Download File">
-                                                        <i class="fas fa-download"></i>
-                                                    </button>
+                                                    @can('download')
+                                                        <button onclick="toDownload('{{ $file->path }}')" class="btn btn-secondary btn-circle btn-sm" title="Download File">
+                                                            <i class="fas fa-download"></i>
+                                                        </button>
+                                                    @endcan
                                                     <button onclick="toDestination('{{ $file->path }}')" class="btn btn-info btn-circle btn-sm" title="Lokasi File">
                                                         <i class="fas fa-location-arrow"></i>
                                                     </button>
-                                                    <button onclick="detail('{{ $file->path }}')" class="btn btn-warning btn-circle btn-sm" title="Preview File">
-                                                        <i class="fas fa-eye"></i>
-                                                    </button>
+                                                    @can('view')
+                                                        <button onclick="detail('{{ $file->path }}')" class="btn btn-warning btn-circle btn-sm" title="Preview File">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                    @endcan
                                                 </td>
                                             </tr>
                                         @endforeach

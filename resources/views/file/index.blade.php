@@ -202,10 +202,12 @@
                                                         <i class="fas fa-trash mr-2"></i>Delete
                                                     </a>
                                                 @endcan
-                                            @else
-                                            <a href="#" class="dropdown-item">
-                                                <i class="fas fa-ban mr-2"></i>Hak Akses Tidak Tersedia
-                                            </a>
+                                            
+                                        @endif
+                                            @if (ContentType::cannotAccess())
+                                                <a href="#" class="dropdown-item">
+                                                    <i class="fas fa-ban mr-2"></i>Hak Akses Tidak Tersedia
+                                                </a>
                                             @endif
                                         @else
                                             @can('download')
@@ -234,11 +236,12 @@
                                                         <i class="fas fa-trash mr-2"></i>Delete
                                                     </a>
                                                 @endcan
-                                            @else
-                                                <a href="#" class="dropdown-item">
-                                                    <i class="fas fa-ban mr-2"></i>Hak Akses Tidak Tersedia
-                                                </a>
                                             @endif
+                                                @if (ContentType::cannotAccess())
+                                                    <a href="#" class="dropdown-item">
+                                                        <i class="fas fa-ban mr-2"></i>Hak Akses Tidak Tersedia
+                                                    </a>
+                                                @endif
                                         @endif
                                     </div>
                                 </div>

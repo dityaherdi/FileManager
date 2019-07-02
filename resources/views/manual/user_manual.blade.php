@@ -70,7 +70,7 @@
                     <li class="js-btn">Pencarian</li>
                     <li class="js-btn">Folder Baru</li>
                     <li class="js-btn">Upload File</li>
-                    <li class="js-btn">Status Folder & File</li>
+                    <li class="js-btn">Status Konten</li>
                     <li class="js-btn">Tombol Option</li>
                     <li class="js-btn">Membuka File</li>
                     <li class="js-btn">Ganti Password</li>

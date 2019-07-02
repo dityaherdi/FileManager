@@ -13,10 +13,10 @@
             <span class="text">Kembali</span>
         </button>
     </div> --}}
-            <div class="alert alert-danger" role="alert">
-                {{-- A simple danger alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like. --}}
-                <i class="fas fa-info-circle"></i> Halaman ini diperuntukan untuk preview saja. <b>Tidak disarankan</b> untuk melakukan editing dokumen secara langsung pada halaman ini. 
-            </div>
+    <div class="alert alert-danger" role="alert">
+        {{-- A simple danger alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like. --}}
+        <i class="fas fa-info-circle"></i> Halaman ini diperuntukan untuk preview saja. <b>Anda tidak diizinkan</b> untuk melakukan editing dokumen secara langsung pada halaman ini. 
+    </div>
     <div class="card text-center mb-5">
         <div class="card-header d-sm-flex align-items-center justify-content-between">
             <button onclick="toDestination('{{ $fileDetail->path }}')" class="btn btn-success btn-icon-split btn-sm">
@@ -28,8 +28,6 @@
             <h6 class="card-title">{{ $fileDetail->nama_file }}</h6>
         </div>
         <div class="card-body">
-            <embed src="{{ asset('storage'.ContentType::getContentByPath($fileDetail->path)) }}" height="600" width="100%"/>
-            <hr>
             @if (ContentType::renderActionButton($fileDetail->path))
                 @can('update')
                     <div id="keteranganActionButton">
@@ -42,7 +40,10 @@
                     </div>
                 @endcan
             @endif
-            <textarea disabled id="keterangan" name="keterangan" class="form-control" placeholder="Tidak ada keterangan">{!! $fileDetail->keterangan == null ? '' : $fileDetail->keterangan !!}</textarea>
+            <textarea rows="3" disabled id="keterangan" name="keterangan" class="form-control" placeholder="Tidak ada keterangan">{!! $fileDetail->keterangan == null ? '' : $fileDetail->keterangan !!}</textarea>
+            <hr>
+            <embed src="{{ asset('storage'.ContentType::getContentByPath($fileDetail->path)) }}" height="600" width="100%"/>
+            <hr>
         </div>
         <div class="card-footer text-muted">
             Size : {{ SizeConverter::formatSizeUnits($fileDetail->size) }} | Modified : {{ ContentType::modified($fileDetail->path) }} | Unit : {{ $fileDetail->unit->nama_unit }}

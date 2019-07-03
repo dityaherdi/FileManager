@@ -166,6 +166,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Chumper\Zipper\ZipperServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -234,6 +235,8 @@ return [
         'SizeConverter' => App\Helpers\SizeConverter::class,
         'ContentType' => App\Helpers\ContentType::class,
         'GlobalVariable' => App\Helpers\GlobalVariable::class,
+
+        'Zipper' => Chumper\Zipper\Zipper::class,
 
     ],
 

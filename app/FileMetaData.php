@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class FileMetaData extends Model
 {
     protected $fillable = [
-        'id_unit', 'nama_file', 'size', 'extensi', 'path', 'isPrivate', 'isParentPrivate','status', 'keterangan'
+        'id_unit', 'nama_file', 'size', 'extensi', 'path', 'isPrivate', 'isParentPrivate', 'status', 'keterangan'
     ];
 
     public function unit()

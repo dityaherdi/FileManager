@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Helpers\Log\FolderAction;
 use App\Helpers\Log\FileAction;
 use App\FileMetaData;
+use App\Unit;
+use Zipper;
+use App\Trash;
+use Carbon\Carbon;
 
 class FolderController extends Controller
 {
@@ -159,27 +163,32 @@ class FolderController extends Controller
         $currentPath = $request->current_path;
 
         if (Storage::exists($request->current_path)) {
-            $fileInsideThisFolder = FileMetaData::where('path', 'LIKE', '%'.$request->current_path.'%')->where(['status' => 1])->get();
-            $folderInsideThisFolder = Folder::where('path', 'LIKE', '%'.$request->current_path.'%')->where(['status' => 1])->get();
+            $toTrash = ContentType::moveToTrash($request->current_path);
 
-            foreach ($fileInsideThisFolder as $fileToDelete) {
-                $fileToDelete->update(['status' => 0]);
-                FileAction::deleted($fileToDelete);
+            if ($toTrash) {
+                $fileInsideThisFolder = FileMetaData::where('path', 'LIKE', '%'.$request->current_path.'%')->where(['status' => 1])->get();
+                $folderInsideThisFolder = Folder::where('path', 'LIKE', '%'.$request->current_path.'%')->where(['status' => 1])->get();
+    
+                foreach ($fileInsideThisFolder as $fileToDelete) {
+                    $fileToDelete->update(['status' => 0]);
+                    FileAction::deleted($fileToDelete);
+                }
+                foreach ($folderInsideThisFolder as $folderToDelete) {
+                    $folderToDelete->update(['status' => 0]);
+                    FolderAction::deleted($folderToDelete);
+                }
+    
+                Storage::deleteDirectory($request->current_path);
+                $currentPath = Str::before($request->current_path, $request->folder);
+                
+                toastr()->success('Folder telah dihapus', 'Sukses');
+                return redirect()->back()->with(compact('currentPath'));
             }
-            foreach ($folderInsideThisFolder as $folderToDelete) {
-                $folderToDelete->update(['status' => 0]);
-                FolderAction::deleted($folderToDelete);
-            }
-
-            Storage::deleteDirectory($request->current_path);
-            $currentPath = Str::before($request->current_path, $request->folder);
-            
-            toastr()->success('Folder telah dihapus', 'Sukses');
-            return redirect()->back()->with(compact('currentPath'));
         } else {
             toastr()->warning('Tidak ada folder yang dihapus', 'Peringatan');
             return redirect()->back()->with(compact('currentPath'));
         }
 
     }
+
 }

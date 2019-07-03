@@ -6,6 +6,9 @@ use Carbon\Carbon;
 use App\Folder;
 use Illuminate\Support\Facades\Auth;
 use App\FileMetaData;
+use App\Unit;
+use Zipper;
+use App\Trash;
 
 class ContentType {
 
@@ -186,6 +189,31 @@ class ContentType {
         } else {
             return true;
         }
+    }
+
+    public static function moveToTrash($pathToTrash)
+    {
+        $unitId = ContentType::whoHasThisPath($pathToTrash);
+        $namaUnit = Unit::where(['id' => $unitId])->value('nama_unit');
+
+        $nama = ContentType::nameOnly($pathToTrash);
+        $zipName = $nama.'_'.now()->timestamp;
+        $zipPath = storage_path('trash').'/'.$zipName.'.zip';
+        $ToZip = storage_path('app/'.$pathToTrash);
+        
+        Zipper::make($zipPath)->add($ToZip)->close();
+
+        Trash::create([
+            'nama_unit' => $namaUnit,
+            'isFile' => ContentType::checkType($pathToTrash) == 'file' ? 1 : 0,
+            'nama_asli' => ContentType::contentName($pathToTrash),
+            'nama_trash' => $zipName.'.zip',
+            'latest_path' => $pathToTrash,
+            'trash_path' => $ToZip,
+            'expired_date' => Carbon::now()->addDays(30)->toDateString()
+        ]);
+
+        return true;
     }
 
 }

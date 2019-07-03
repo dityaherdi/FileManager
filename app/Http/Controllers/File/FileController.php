@@ -13,6 +13,10 @@ use App\Helpers\Log\FileAction;
 use App\Helpers\ContentType;
 use App\Helpers\SizeConverter;
 use App\Http\Requests\FileUploadRequest;
+use App\Trash;
+use Zipper;
+use Carbon\Carbon;
+use App\Unit;
 
 class FileController extends Controller
 {
@@ -131,13 +135,17 @@ class FileController extends Controller
 
         if (Storage::exists($request->current_path)) {
             $currentPath = Str::before($request->current_path, $request->file);
-            Storage::delete($request->current_path);
-            $file = FileMetaData::where(['path' => $request->current_path, 'status' => 1])->first();
-            $file->update(['status' => 0]);
-
-            FileAction::deleted($file);
-            toastr()->success('File telah dihapus', 'Sukses');
-            return redirect()->back()->with(compact('currentPath'));
+            $toTrash = ContentType::moveToTrash($request->current_path);
+            
+            if ($toTrash) {
+                $file = FileMetaData::where(['path' => $request->current_path, 'status' => 1])->first();
+                $file->update(['status' => 0]);
+                Storage::delete($request->current_path);
+    
+                FileAction::deleted($file);
+                toastr()->success('File telah dihapus', 'Sukses');
+                return redirect()->back()->with(compact('currentPath'));
+            }
         } else {
             toastr()->warning('Tidak ada file yang dihapus', 'Peringatan');
             return redirect()->back()->with(compact('currentPath'));

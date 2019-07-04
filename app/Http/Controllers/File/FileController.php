@@ -80,7 +80,7 @@ class FileController extends Controller
                     FileAction::created($file);
 
                     toastr()->success('Upload file berhasil!', 'Sukses');
-                    return redirect()->back()->with(compact('currentPath'));   
+                    return redirect()->back()->with(compact('currentPath'));
                 }
 
                 toastr()->error('File yang sama sudah diupload!', 'Error');

@@ -132,28 +132,6 @@ class FolderController extends Controller
         toastr()->info('Tidak ada pembaruan dilakukan', 'Info');
         return redirect()->back()->with(compact('currentPath'));
 
-        // Code below is working but still not working properly
-        // $currentPath = $request->current_path;
-
-        // $base = Str::before($request->current_path, $request->current_name);
-        // $toUpdate = $base.$request->nama_folder;
-
-        // if ($currentPath != $toUpdate) {
-        //     $oldName = ContentType::contentName($currentPath);
-
-        //     Storage::move($currentPath, $toUpdate);
-        //     $folder = Folder::where(['path' => $currentPath, 'status' => 1])->first();
-        //     $folder->update(['nama_folder' => $request->nama_folder, 'path' => $toUpdate]);
-            
-        //     $currentPath = $toUpdate;
-            
-        //     FolderAction::renamed($folder, $oldName);
-        //     toastr()->success('Folder telah diperbarui', 'Sukses');
-        //     return redirect()->back()->with(compact('currentPath'));
-        // }
-
-        // toastr()->info('Tidak ada pembaruan dilakukan', 'Info');
-        // return redirect()->back()->with(compact('currentPath'));
     }
 
     // Menghapus folder

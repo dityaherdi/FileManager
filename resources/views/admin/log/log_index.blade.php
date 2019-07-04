@@ -13,7 +13,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered table-hover" id="logTable" width="100%" cellspacing="0">
+                <table class="table table-sm table-bordered table-hover" id="logTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>Tanggal</th>

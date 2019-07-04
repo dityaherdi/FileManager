@@ -1,13 +1,13 @@
 <!-- Sidebar -->
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home') }}">
       <div class="sidebar-brand-icon">
         {{-- <i class="fas fa-warehouse"></i> --}}
-        <img src="{{ asset('img/logo.png') }}" style="width: 60%">
+        <img src="{{ asset('img/logo.png') }}" style="width: 30%">
       </div>
-      <div class="sidebar-brand-text mx-3">Bunda FM</div>
+      {{-- <div class="sidebar-brand-text mx-3">Bunda FM</div> --}}
     </a>
 
     <!-- Divider -->
@@ -82,6 +82,14 @@
       </li>
     @endif
     
+    <!-- Nav Item - User Log -->
+    @can('isAdmin')
+        <li class="nav-item">
+        <a class="nav-link" href="{{ route('trash.index') }}">
+            <i class="fas fa-fw fa-recycle"></i>
+            <span>Recycle Bin</span></a>
+        </li>
+    @endcan
 
     <!-- Nav Item - User Log -->
     @can('isAdmin')
@@ -96,9 +104,9 @@
     <hr class="sidebar-divider d-none d-md-block">
 
     <!-- Sidebar Toggler (Sidebar) -->
-    {{-- <div class="text-center d-none d-md-inline">
+    <div class="text-center d-none d-md-inline">
       <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div> --}}
+    </div>
 
   </ul>
   <!-- End of Sidebar -->

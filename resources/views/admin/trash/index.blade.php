@@ -7,20 +7,20 @@
 
 @section('content')
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">User</h1>
-        <a href="{{ route('user.create') }}" class="btn btn-primary btn-icon-split">
+    {{-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Jabatan</h1>
+        <a href="{{ route('jabatan.create') }}" class="btn btn-primary btn-icon-split">
             <span class="icon text-white-50">
                 <i class="fas fa-plus-circle"></i>
             </span>
-            <span class="text">Tambah User</span>
+            <span class="text">Tambah Jabatan</span>
         </a>
-    </div>
+    </div> --}}
 
     <!-- DataTables -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Master Data User</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Master Data Jabatan</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -28,7 +28,9 @@
                 <thead>
                 <tr>
                     <th>No</th>
-                    <th>Nama User</th>
+                    <th>Nama Unit</th>
+                    <th>Nama ZIP File</th>
+                    <th>Expired Date</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -36,23 +38,26 @@
                 @php
                     $no = 1;
                 @endphp
-                @foreach ($dataUser as $user)
+                @foreach ($trashes as $trash)
                     <tr>
                         <td>{{ $no++ }}</td>
-                        <td>{{ $user->nama_user }}</td>
+                        <td>{{ $trash->nama_unit }}</td>
+                        <td>{{ $trash->nama_trash }}</td>
+                        <td>{{ $trash->expired_date }}</td>
+                        {{-- <td>{{ $trash->id }}</td> --}}
                         <td>
-                            <a href="{{ route('user.edit', $user->id) }}" class="btn btn-sm btn-success btn-icon-split">
+                            {{-- <a href="#" class="btn btn-sm btn-success btn-icon-split">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-pen-alt"></i>
                                 </span>
                                 <span class="text">Edit</span>
-                            </a>
-                            <button class="btn btn-sm btn-danger btn-icon-split" type="submit" onclick="confirmDelete(event, {{ $user }})">
+                            </a> --}}
+                            <button class="btn btn-sm btn-danger btn-icon-split" type="submit" onclick="confirmPermanentDelete(event, {{ $trash }})">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-trash"></i>
                                 </span>
                                 <span class="text">
-                                    Delete
+                                    Delete Permanen
                                 </span>
                             </button>
                         </td>
@@ -60,21 +65,20 @@
                 @endforeach
                 </tbody>
             </table>
-            <form action="" id="formDeleteUser" method="post" style="display: none;">
+            <form action="" id="formDeletePermanen" method="post" style="display: none;">
                 @csrf
-                @method('DELETE')
             </form>
             </div>
         </div>
     </div>
     <script>
-        function confirmDelete (event, user) {
-            var urlDeleteUser = '{{ route("user.destroy", ":id") }}'
-            urlDeleteUser = urlDeleteUser.replace(':id', user.id)
+        function confirmPermanentDelete (event, trash) {
+            var urlDeleteTrash = '{{ route("trash.destroy", ":id") }}'
+            urlDeleteTrash = urlDeleteTrash.replace(':id', trash.id)
 
             Swal.fire({
-                title: 'Hapus User '+user.nama_user+' ?',
-                text: "User yang dihapus tidak dapat dikembalikan!",
+                title: 'Hapus ZIP ini ?',
+                text: "Arsip ini akan dihapus secara permanen. Lanjutkan?",
                 type: 'question',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -84,7 +88,7 @@
                 }).then((result) => {
                 if (result.value) {
                     event.preventDefault()
-                    $('#formDeleteUser').attr('action', urlDeleteUser).submit()                
+                    $('#formDeletePermanen').attr('action', urlDeleteTrash).submit()
                 }
             })
         }

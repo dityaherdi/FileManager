@@ -200,7 +200,9 @@ class ContentType {
         $zipName = $nama.'_'.now()->timestamp;
         $zipPath = storage_path('trash').'/'.$zipName.'.zip';
         $ToZip = storage_path('app/'.$pathToTrash);
-        
+        // $zipPathInStorage = '/'.'trash/'.$zipName.'.zip';
+        // dd($zipPathInStorage);
+                
         Zipper::make($zipPath)->add($ToZip)->close();
 
         Trash::create([
@@ -209,7 +211,7 @@ class ContentType {
             'nama_asli' => ContentType::contentName($pathToTrash),
             'nama_trash' => $zipName.'.zip',
             'latest_path' => $pathToTrash,
-            'trash_path' => $ToZip,
+            'trash_path' => $zipPath,
             'expired_date' => Carbon::now()->addDays(30)->toDateString()
         ]);
 

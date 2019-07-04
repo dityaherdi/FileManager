@@ -64,6 +64,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('log', 'LogController@index')->name('log.index');
         Route::get('akses', 'PermissionController@index')->name('akses.index');
         Route::post('akses/update', 'PermissionController@updateAkses')->name('akses.update');
+
+        Route::get('trash', 'TrashController@index')->name('trash.index');
+        Route::post('delete-trash/{id}', 'TrashController@permanentDelete')->name('trash.destroy');
     });
 
     // Global Search

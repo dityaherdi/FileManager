@@ -20,7 +20,16 @@
     <!-- DataTables -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Master Data Jabatan</h6>
+            <div class="d-sm-flex align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">ZIP Files</h6>
+                    {{-- <a href="{{ route('trash.cleanup') }}" class="btn btn-dark btn-icon-split btn-sm"> --}}
+                    <button onclick="changeStatusModal()" class="btn btn-dark btn-icon-split btn-sm">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-bolt"></i>
+                    </span>
+                    <span class="text">Clean-Up Space</span>
+                </a>
+            </div>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -29,8 +38,10 @@
                 <tr>
                     <th>No</th>
                     <th>Nama Unit</th>
+                    <th>Tipe</th>
                     <th>Nama ZIP File</th>
                     <th>Expired Date</th>
+                    <th>Status Expired</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -42,16 +53,17 @@
                     <tr>
                         <td>{{ $no++ }}</td>
                         <td>{{ $trash->nama_unit }}</td>
+                        <td>{{ $trash->isFile ? 'File' : 'Folder' }}</td>
                         <td>{{ $trash->nama_trash }}</td>
                         <td>{{ $trash->expired_date }}</td>
-                        {{-- <td>{{ $trash->id }}</td> --}}
                         <td>
-                            {{-- <a href="#" class="btn btn-sm btn-success btn-icon-split">
-                                <span class="icon text-white-50">
-                                    <i class="fas fa-pen-alt"></i>
-                                </span>
-                                <span class="text">Edit</span>
-                            </a> --}}
+                            @if (ContentType::isExpired($trash->expired_date))
+                                <span class="badge badge-danger">Expired</span>
+                            @else
+                                <span class="badge badge-success">Available</span>
+                            @endif
+                        </td>
+                        <td>
                             <button class="btn btn-sm btn-danger btn-icon-split" type="submit" onclick="confirmPermanentDelete(event, {{ $trash }})">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-trash"></i>
@@ -71,6 +83,9 @@
             </div>
         </div>
     </div>
+
+    @include('admin.trash.confirm_cleanup_modal')
+
     <script>
         function confirmPermanentDelete (event, trash) {
             var urlDeleteTrash = '{{ route("trash.destroy", ":id") }}'
@@ -91,6 +106,10 @@
                     $('#formDeletePermanen').attr('action', urlDeleteTrash).submit()
                 }
             })
+        }
+
+        function changeStatusModal() {
+            $('#changeStatusModal').modal('show')
         }
     </script>
 @endsection

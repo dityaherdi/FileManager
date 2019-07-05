@@ -67,6 +67,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('trash', 'TrashController@index')->name('trash.index');
         Route::post('delete-trash/{id}', 'TrashController@permanentDelete')->name('trash.destroy');
+        Route::get('cleanup', 'TrashController@cleanUp')->name('trash.cleanup');
     });
 
     // Global Search

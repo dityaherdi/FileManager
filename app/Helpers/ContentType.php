@@ -218,4 +218,14 @@ class ContentType {
         return true;
     }
 
+    public static function isExpired($expdate)
+    {
+        $exp = Carbon::parse($expdate);
+        if (Carbon::now()->greaterThanOrEqualTo($exp)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

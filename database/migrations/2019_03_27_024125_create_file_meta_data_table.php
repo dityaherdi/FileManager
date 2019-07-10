@@ -26,7 +26,7 @@ class CreateFileMetaDataTable extends Migration
             $table->text('keterangan')->nullable();
             $table->timestamps();
 
-            $table->foreign('id_unit')->references('id')->on('units')->onDelete('cascade');
+            $table->foreign('id_unit')->references('id')->on('units');
         });
     }
 

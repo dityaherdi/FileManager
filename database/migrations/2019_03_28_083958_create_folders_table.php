@@ -24,7 +24,7 @@ class CreateFoldersTable extends Migration
             $table->boolean('status')->default(1);
             $table->timestamps();
 
-            $table->foreign('id_unit')->references('id')->on('units')->onDelete('cascade');
+            $table->foreign('id_unit')->references('id')->on('units');
         });
     }
 

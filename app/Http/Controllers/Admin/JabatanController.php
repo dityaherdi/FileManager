@@ -90,7 +90,8 @@ class JabatanController extends Controller
     public function destroy($id)
     {
         $jabatan = Jabatan::findOrFail($id);
-        $jabatan->delete();
+        // $jabatan->delete();
+
         toastr()->success('Jabatan '.$jabatan->nama_jabatan.' telah dihapus!', 'Sukses');
         return redirect(route('jabatan.index'));
     }

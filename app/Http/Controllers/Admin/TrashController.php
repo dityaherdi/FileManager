@@ -47,6 +47,5 @@ class TrashController extends Controller
             toastr()->warning('Tidak ada ZIP yang dapat dibersihkan', 'Peringatan');
             return redirect()->back();
         }
-
     }
 }

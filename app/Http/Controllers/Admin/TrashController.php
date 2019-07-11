@@ -47,5 +47,20 @@ class TrashController extends Controller
             toastr()->warning('Tidak ada ZIP yang dapat dibersihkan', 'Peringatan');
             return redirect()->back();
         }
+
+    }
+
+    public static function scheduledCleanUp()
+    {
+        $trashesToDelete = Trash::where(['isTrashRemovedPermanently' => 0])->whereDate('expired_date', '<=', Carbon::now())->get();
+
+        if ($trashesToDelete->count() > 0) {
+            foreach ($trashesToDelete as $trash) {
+                $trash->update([
+                    'isTrashRemovedPermanently' => 1
+                ]);
+                unlink($trash->trash_path);
+            }
+        }
     }
 }
